@@ -1,6 +1,6 @@
 # Typora Feature Showcase & Guide by Claude
 
-# Homework 3
+# Best Veiwed in Typora
 
 **This README is designed to demonstrate Typora's features!** Open this file in Typora and toggle Source Code Mode (`⌘+/` or `Ctrl+/`) to see how each feature is created.
 
