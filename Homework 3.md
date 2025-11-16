@@ -144,7 +144,7 @@ $$Opt_{frac} = v(Alg_1) + v_{j \: frac} \implies Opt \leq v(Alg_1) + v_j$$
 
 $$Alg_2 = \max{v(Alg_1), v_j} \geq \frac{1}{2} v(Alg_1) + v_j \geq \frac{1}{2} Opt$$
 
-$$Alg_2 \geq \frac{1}{2}Opt$$
+Thus: $$Alg_2 \geq \frac{1}{2}Opt \qquad \alpha = \frac{1}{2}$$
 
 ---
 
