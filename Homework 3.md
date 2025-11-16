@@ -9,7 +9,7 @@ Show that the logarithmic approximation ratio found in class for the Set Cover
 problem is tight (i.e., show that there are arbitrarily large Set Cover instances such that
 \(\text{ALG} \le O(\ln n)\, \text{OPT}\)).
 
-### Solution
+ **Solution:**
 Given sets:
 
 
@@ -34,7 +34,7 @@ $$
 Even \hspace{1cm} Odd
 $$
 
-Optimal is Even and Odd sets. Algorithm selects set 1 as the next greatest set is odd with 8 elements. Then sets two, three, and four.
+Optimal is Even and Odd sets. Algorithm selects set 1 as the next greatest set would have been odd with 8 elements. Then sets two, three, and four.
 
 \[
 Alg = k
@@ -92,7 +92,7 @@ There is no constant approximation ratio. As the ratio will be $\frac{W}{2}$. Wh
 | …    | …     | …      | …     |
 | W+1  | ε     | 1      | ε     |
 
-If we have the items depicted above are algorithm will select all of the small ratio items. Giving $(W-1)\epsilon$. Then it will select item 2 at which point item 1 will not be able to fit and the algorithm will stop. 
+If we have the items depicted above, our algorithm will select all of the small ratio items. Giving $(W-1)\epsilon$. Then it will select item 2 giving $(W-1)\epsilon + 2$ at which point item 1 will not be able to fit and the algorithm will stop. 
 $$
 Alg = 2 + (W-1)\epsilon = 2 \qquad as \qquad (\epsilon \to 0)
 $$
@@ -126,6 +126,25 @@ Consider the following algorithm for the Knapsack problem discussed in class: Se
 What is the approximation ratio for this algorithm? Explain why that is the case.
 
 *Hint:* Consider what would happen if we were allowed to take fractional amounts of the items.
+
+**Solution:**
+
+The Algorithm $(Alg_1)$ in Problem 2 is optimal if we are able to take fractional amounts of an item because if there was a more optimal approach we would then be taking out an item and replacing with something that weighs more and has less value which can not make a more optimal solution.
+
+$$ Opt \leq Opt_{frac} $$ (Since $Opt_{frac}$ has more options then $Opt$)
+
+$$Alg_2 = max \begin{cases}
+v(Alg_1)\\
+Single \: Highest \: Valued \: Item \: (v_j)
+\end{cases}$$
+
+$$ Opt \leq Opt_{frac} \leq v(Alg_{1})+v_j \qquad $$ Where $v_j$ is the value of the item that is added fractionally.
+
+$$Opt_{frac} = v(Alg_1) + v_{j \: frac} \implies Opt \leq v(Alg_1) + v_j$$
+
+$$Alg_2 = \max{v(Alg_1), v_j} \geq \frac{1}{2} v(Alg_1) + v_j \geq \frac{1}{2} Opt$$
+
+$$Alg_2 \geq \frac{1}{2}Opt$$
 
 ---
 
