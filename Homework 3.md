@@ -80,7 +80,41 @@ highest-valued item at each iteration.
 **Question:**
 What is the approximation ratio for this algorithm? Explain why that is the case.
 
----
+**Solution:**
+
+There is no constant approximation ratio. As the ratio will be $\frac{W}{2}$. Which can be infinitely bad.
+
+| Item | Value | Weight | Ratio |
+| ---- | ----- | ------ | ----- |
+| 1    | W     | W      | 1     |
+| 2    | 2     | 1      | 2     |
+| 3    | ε     | 1      | ε     |
+| …    | …     | …      | …     |
+| W+1  | ε     | 1      | ε     |
+
+If we have the items depicted above are algorithm will select all of the small ratio items. Giving $(W-1)\epsilon$. Then it will select item 2 at which point item 1 will not be able to fit and the algorithm will stop. 
+$$
+Alg = 2 + (W-1)\epsilon = 2 \qquad as \qquad (\epsilon \to 0)
+$$
+
+$$
+Opt = W
+$$
+
+$$
+Alg \geq \frac{1}{\alpha}Opt
+$$
+
+
+$$
+\frac{Opt}{Alg} \leq \alpha
+$$
+
+$$
+Thus: \alpha = \frac{W}{2}
+$$
+
+
 
 ## Problem 3
 Consider the following algorithm for the Knapsack problem discussed in class: Select the best of:
