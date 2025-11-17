@@ -281,4 +281,10 @@ Consider the following randomized algorithm:
 
 **Solution:**
 
+* Let random variable $X_e = \begin{cases}
+  1 \text{, if e crosses cut}\\
+  0 \text{, if not}
+  \end{cases}$
+* Value of the cut = $\sum_e X_e w_e$. The expected value of the cut is $E[\sum_e X_e w_e] = Alg$. The expected value of edge e is $E[X_e]=\frac{1}{2}$ since we have a fifty percent chance of placing the edge in the cut. $\sum_e w_e \geq Opt$ Since Opt can not be greater than the sum of all the edges. $Alg = \sum_e w_e E[X_e]$ moving the probability in giving $Alg = \frac{1}{2} \sum_e w_e$. Since we know $\sum_e w_e \geq Opt$ then $\frac{1}{2}\sum_e w_e \geq \frac{1}{2}Opt$ is also true and we then can subsitute $Alg = \frac{1}{2} \sum_e w_e$ thus giving $Alg \geq \frac{1}{2} Opt$.
+
 ---
