@@ -131,20 +131,20 @@ What is the approximation ratio for this algorithm? Explain why that is the case
 
 The Algorithm $(Alg_1)$ in Problem 2 is optimal if we are able to take fractional amounts of an item because if there was a more optimal approach we would then be taking out an item and replacing with something that weighs more and has less value which can not make a more optimal solution.
 
-$$ Opt \leq Opt_{frac} $$ (Since $Opt_{frac}$ has more options then $Opt$)
+* $$ Opt \leq Opt_{frac} $$ (Since $Opt_{frac}$ has more options then $Opt$)
 
-$$Alg_2 = max \begin{cases}
-v(Alg_1)\\
-Single \: Highest \: Valued \: Item \: (v_j)
-\end{cases}$$
+* $$Alg_2 = max \begin{cases}
+  v(Alg_1)\\
+  Single \: Highest \: Valued \: Item \: (v_j)
+  \end{cases}$$
 
-$$ Opt \leq Opt_{frac} \leq v(Alg_{1})+v_j \qquad $$ Where $v_j$ is the value of the item that is added fractionally.
+* $$ Opt \leq Opt_{frac} \leq v(Alg_{1})+v_j \qquad $$ Where $v_j$ is the value of the item that is added fractionally.
 
-$$Opt_{frac} = v(Alg_1) + v_{j \: frac} \implies Opt \leq v(Alg_1) + v_j$$
+* $$Opt_{frac} = v(Alg_1) + v_{j \: frac} \implies Opt \leq v(Alg_1) + v_j$$
 
-$$Alg_2 = \max{v(Alg_1), v_j} \geq \frac{1}{2} v(Alg_1) + v_j \geq \frac{1}{2} Opt$$
+* $$Alg_2 = \max{v(Alg_1), v_j} \geq \frac{1}{2} (v(Alg_1) + v_j) \geq \frac{1}{2} Opt$$
 
-Thus: $$Alg_2 \geq \frac{1}{2}Opt \qquad \alpha = \frac{1}{2}$$
+* Thus: $$Alg_2 \geq \frac{1}{2}Opt \qquad \alpha = \frac{1}{2}$$
 
 ---
 
@@ -226,7 +226,30 @@ Show that this algorithm is a 2-approximation algorithm.
 
 *Hint:* First show that $\frac{1}{w}\sum_i t_i \le \text{OPT}$.
  Then consider the last task assigned to the worker responsible for the algorithm’s cost.
- Why was that task assigned to that worker?
+ Why was that task assigned to that worker? (Had Minimal Work Time)
+
+**Solution:**
+
+* $A_w = \text{Tasks assigned to worker w}$
+
+* $T_w = \sum_{i\in A_w} t_i \text{Worker w's work time}$
+
+* $Opt = \text{how long the work day is for the longest working worker.}$
+* $$\text{Total work time} \le w \: Opt \lt \: w \frac{1}{w}\sum_i t_i = \text{Total work time needed}$$
+
+* Thus: $\frac{1}{w}\sum_i t_i \le \text{OPT}$
+
+* $Alg - t_i \le T_w \text{, for all workers}$
+
+This holds when task $i$ is assigned and at the end of the schedule, since $ALG - t_i$ does not change as more tasks are scheduled, but $T_w$ may get larger.
+
+* $Alg = T_w + t_i$
+
+* $T_w \leq \frac{1}{w}\sum_{w=1}{T_w} \leq \frac{1}{w} \sum_i t_i \leq Opt$
+
+* $t_i \leq Opt$
+
+* Thus: $Alg \leq Opt + Opt = 2 Opt$
 
 ------
 
@@ -238,6 +261,8 @@ The **Minimum Dominating Set** problem is:
 **Task:**
  Find an approximation algorithm for the Minimum Dominating Set problem.
  (Hint: Draw it out and consider whether it is similar to a problem studied in class.)
+
+**Solution:**
 
 ------
 
@@ -253,5 +278,7 @@ Consider the following randomized algorithm:
 
 **Task:**
  Show that this algorithm is a $\tfrac{1}{2}$-approximation algorithm.
+
+**Solution:**
 
 ---
