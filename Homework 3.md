@@ -1,13 +1,13 @@
 # Homework 3
 **Due:** November 18
-**Authors:** Zachariah Craven, Dillion Shaffer
+**Authors:** Zachariah Craven, Dillon Shaffer
 
 ---
 
 ## Problem 1
 Show that the logarithmic approximation ratio found in class for the Set Cover
 problem is tight (i.e., show that there are arbitrarily large Set Cover instances such that
-\(\text{ALG} \le O(\ln n)\, \text{OPT}\)).
+$\text{ALG} \le O(\ln n)\, \text{OPT}$).
 
 ### Solution
 Given sets:
@@ -60,7 +60,7 @@ n = 2^{k-1} + 2^{k-2} ...+ 2^{k-k} = 2^k-1
 k = \frac{ln(n)}{ln(2)}
 \]
 
-Dropping Constants we see $Alg = O(ln(n))$ as n grows.
+Dropping Constants we see $Alg = O(ln n)$ as n grows.
 $$
 \frac{Alg}{Opt} = \frac{ln(n)}{2ln(2)} = O(ln(n))
 $$
@@ -92,7 +92,7 @@ There is no constant approximation ratio. As the ratio will be $\frac{W}{2}$. Wh
 | …    | …     | …      | …     |
 | W+1  | ε     | 1      | ε     |
 
-If we have the items depicted above are algorithm will select all of the small ratio items. Giving $(W-1)\epsilon$. Then it will select item 2 at which point item 1 will not be able to fit and the algorithm will stop. 
+If we have the items depicted above, our algorithm will select all of the small ratio items. Given the value of items, $(W-1)\epsilon$,  it will select item 2. At this point, item 1 will not be able to fit in the knapsack and the algorithm will halt. 
 $$
 Alg = 2 + (W-1)\epsilon = 2 \qquad as \qquad (\epsilon \to 0)
 $$
@@ -129,29 +129,68 @@ What is the approximation ratio for this algorithm? Explain why that is the case
 
 ---
 
-## Problem 4
+##  Problem 4
 Consider this variation on the classic Set Cover problem:
 
-We have a universe of elements \(U\) and a collection of sets \(S\), where each set
-\(S_i \in S\) has a non-negative cost \(c_i\). Each element of the universe appears in at most
-\(d\) sets (for a fixed constant \(d\) independent of the element).
+We have a universe of elements $U$ and a collection of sets $S$, where each set
+$S_i \in S$ has a non-negative cost $c_i$. Each element of the universe appears in at most
+$d$ sets (for a fixed constant $d$ independent of the element).
 
-The goal is to select a subset of \(S\) of minimum total cost such that every element of \(U\)
+The goal is to select a subset of $S$ of minimum total cost such that every element of $$U
 is contained in at least one selected set.
 
 **Task:**
+
 - Formulate this problem as an ILP.
 - Relax the ILP.
 - Perform a deterministic rounding procedure to obtain an approximation algorithm.
-- Describe the algorithm and prove that it achieves a \(d\)-approximation ratio.
+- Describe the algorithm and prove that it achieves a $d$-approximation ratio.
+
+
+
+### Solution
+
+#### First, an ILP
+
+Our goal is: $min \sum_{i < |S|} c_i \cdot x_i$
+
+We have two types of variables:
+
+- $x_i, \forall i < |S|$, where each $x_i$ represents the selection of the corresponding $S_i$
+- $c_i, \forall i < |S|$, where each $c_i$ represents $cost(S_i)$
+
+And our rules:
+
+- $(\sum_{S_i \in \text{sets-that-contain}(u)} x_i) \ge 1, \forall u \in U$, which represents that for each element, there must be at least one set selected that contains it.
+- $(x_i \in [0, 1]), \forall i < |S|$, which represents that each set can either be selected or not, no in-between
+
+#### Second, A Relaxed ILP
+
+We, unfortunately, cannot completely relax our ILP. However, we jump a head a little to explain why there is a work around.
+
+We have to modify the second rule into this: $(x_i \in \{0, 1\}), \forall i < |S|$ to be a real-valued LP.
+
+#### Third, A "Deterministic Rounding Procedure"
+
+In order to reduce the complexity of our ILP to polynomial time, we relaxed it into an LP. This, however, discarded the property of $x_i \in [0, 1]$ in favor of $x_i \in {0, 1}$. This is okay if we can define what it means for an $x_i$ to be 0.5, or 0.7, or any other real-value. We can use the property of this problem, that each element is in at most $d$ sets. We utilize it by rounding up any value greater-than-or-equal-to $\frac{1}{d}$. This value is special because it is the minimum value of an $x_i$ that signifies that the corresponding $S_i$$ must be in the Set-Cover.
+
+We can logically prove this to be true by thinking about what happens when a set is not selected because each of its elements in $U$ are selected by other, lower-cost sets. Since each element requires that the sum of the selection values of each of its sets must be greater-than-or-equal-to 1, it means that a set can be partially selected but only truly in the set-cover if it passes that $1/d$ threshold. This is because one set with higher cost but many more elements can be partially selected with another set that has a low cost but only one element that overlaps. In that case, the larger set will be picked (despite its higher cost) because the value of that set is important to many clauses for the different elements it contains (assuming there is no larger or cheaper cost set). Smaller values ($< 1/d$) may be attributed to other sets that do provide an element but are not essential to the cover given the min-cost. This is because they are required to have a non-zero value by the clause for each of their universe-elements but not in a significant way to pass the $1/d$ threshold.
+
+#### Fourth,  the d-ratio
+
+To prove that this is a $d$-approximation algorithm, we need to compute the minimum cost and show the difference from the optimal algorithm.
+$$
+cost(S) = \sum_{i:x_i\ge1/d} c_i
+$$
+We can then prove that $ALG \ge d \cdot OPT$ by showing that $1 \le \frac{x_i}{d}$ for each element in the sum. This fact let's us show that $\sum c_i \le d \sum c_i x_i$. In other words, the optimal cost is less-than-or-equal-to the approximated cost times $d$.
 
 ---
 
 ## Problem 5
-Suppose we have \(n\) tasks to be completed and \(w\) identical workers who can
-complete them. Each task has a time \(t_i\) that it takes a worker to complete.
+Suppose we have $n$ tasks to be completed and $w$ identical workers who can
+complete them. Each task has a time $t_i$ that it takes a worker to complete.
 
-Let \(A_w\) denote the tasks assigned to worker \(w\). This means the total work time for worker \(w\) is:
+Let $A_w$ denote the tasks assigned to worker $w$. This means the total work time for worker $w$ is:
 
 \[
 T_w = \sum_{i \in A_w} t_i.
