@@ -266,7 +266,7 @@ The **Minimum Dominating Set** problem is:
 
 * Reformulate Minimum Dominating Set as Set Cover.
 
-  * For every node mark make a set that is that node and every node connected to it.
+  * For every node mark that node and make a set that is that node and every node connected to it.
 
 * Run the set cover algorithm from class. Obtaining $\alpha$
 
