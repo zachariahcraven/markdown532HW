@@ -201,7 +201,7 @@ To prove that this is a $d$-approximation algorithm, we need to compute the mini
 $$
 cost(S) = \sum_{i:x_i\ge1/d} c_i
 $$
-We can then prove that $ALG \ge d \cdot OPT$ by showing that $1 \le \frac{x_i}{d}$ for each element in the sum. This fact let's us show that $\sum c_i \le d \sum c_i x_i$. In other words, the optimal cost is less-than-or-equal-to the approximated cost times $d$.
+We can then prove that $ALG \ge d \cdot OPT$ by showing that $1 \le \frac{x_i}{d}$ for each element in the sum. This fact let's us show that $\sum cost(S_i) \le 1/d \sum c_i x_i$. In other words, the optimal cost is less-than-or-equal-to the approximated cost times the inverse of $d$.
 
 ---
 
@@ -281,7 +281,7 @@ The **Minimum Dominating Set** problem is:
   * Given: $1-x \lt e^{-x} \text{ for all } x \ne 0 $
   * $ n_t \le n(1-\frac{1}{Opt})^t \lt ne^{-\frac{1}{Opt}^{t}}=ne^{-\frac{t}{Opt}}$
   *  $t \ge Opt \ln(n)$
-  * So, when t = Opt no elements remain. Thus, the universe is covered after at most t = Opt ln n iterations. $Alg \le \ln{n} \: Opt$
+  * So, when $t = Opt$ no elements remain. Thus, the universe is covered after at most $t = Opt \cdot ln(n)$ iterations. $Alg \le \ln{n} \: Opt$
 
 * Of the selected sets, select the marked node in each set. The selected nodes will represent the Minimum Dominating Set.
 
