@@ -264,6 +264,31 @@ The **Minimum Dominating Set** problem is:
 
 **Solution:**
 
+* Reformulate Minimum Dominating Set as Set Cover.
+
+  * For every node mark make a set that is that node and every node connected to it.
+
+* Run the set cover algorithm from class. Obtaining $\alpha$
+
+  * Choose set that covers the most elements in the universe.
+  * Continue until all elements in the universe are covered.
+
+  * $Alg = \text{selected sets}$
+
+  * $Opt = \text{minimal sets needed}$
+
+  * $n_t \leq n_{t-1} - \frac{n_{t-1}}{Opt} = n_{t-1}(1-\frac{1}{Opt}) \leq n (1 - \frac{1}{Opt})^t$
+  * Given: $1-x \lt e^{-x} \text{ for all } x \ne 0 $
+  * $ n_t \le n(1-\frac{1}{Opt})^t \lt ne^{-\frac{1}{Opt}^{t}}=ne^{-\frac{t}{Opt}}$
+  *  $t \ge Opt \ln(n)$
+  * So, when t = Opt no elements remain. Thus, the universe is covered after at most t = Opt ln n iterations. $Alg \le \ln{n} \: Opt$
+
+* Of the selected sets, select the marked node in each set. The selected nodes will represent the Minimum Dominating Set.
+
+* This algorithm provides a valid solution of selected nodes. Each marked vertex in the set represents the node that we would select to cover all other vertex's in the set. The Algorithm does not halt until all elements in the universe our covered and each marked node in its respective set covers every node in the set.
+
+
+
 ------
 
 ## **Problem 7**
